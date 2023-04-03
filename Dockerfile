@@ -14,16 +14,16 @@ RUN apt-get -y update && apt-get -y install python3
 
 RUN npm install nexe -g
 
-RUN [ "nexe", "index.js", "--build", "-o test.exe", "--target linux-x64", "--python python3", "--verbose" ]
+RUN [ "nexe", "index.js", "--build", "-o test", "--target linux-x64", "--python python3", "--verbose" ]
 
 FROM alpine
 RUN apk add --no-cache libstdc++ libgcc
 WORKDIR /usr/src/app
-COPY --from=build /usr/src/app/test.exe test.exe
+COPY --from=build /usr/src/app/test test
 
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_x86_64 /usr/local/bin/dumb-init
 RUN chmod +x /usr/local/bin/dumb-init
 ENTRYPOINT ["dumb-init", "--"]
 
 EXPOSE 9000
-CMD ["./test.exe"]
+CMD ["./test"]
