@@ -1,4 +1,4 @@
-FROM node:16-alpine as build
+FROM --platform=linux/amd64 node:16 as build
 
 WORKDIR /usr/src/app
 
@@ -10,9 +10,11 @@ COPY . .
 
 EXPOSE 9000
 
+RUN apt-get -y update && apt-get -y install python3
+
 RUN npm install nexe -g
 
-RUN [ "nexe", "/usr/src/app/index.js", "--build", "-o test.exe", "--verbose" ]
+RUN [ "nexe", "index.js", "--build", "-o test.exe", "--target linux-x64", "--python python3", "--verbose" ]
 
 FROM alpine
 RUN apk add --no-cache libstdc++ libgcc
