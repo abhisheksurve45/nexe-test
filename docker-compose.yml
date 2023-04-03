@@ -1,0 +1,10 @@
+---
+version: "3.2"
+services:
+  nexe-test:
+    network_mode: host
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nexe-test:latest
+    platform: linux/amd64
