@@ -11,6 +11,8 @@ COPY . .
 EXPOSE 9000
 
 RUN apk add --no-cache python3 py3-pip
+RUN apk --update add gcc make g++ zlib-dev
+
 
 RUN npm install nexe -g
 
