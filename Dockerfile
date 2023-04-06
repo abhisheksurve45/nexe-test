@@ -10,8 +10,7 @@ COPY . .
 
 EXPOSE 9000
 
-RUN apk add --no-cache python3 py3-pip
-RUN apk --update add --no-cache curl make gcc g++ binutils-gold python linux-headers paxctl libgcc libstdc++ git vim tar gzip wget
+RUN apk --update add --no-cache curl make gcc g++ binutils-gold python linux-headers paxctl libgcc libstdc++ git vim tar gzip wget python3 py3-pip
 
 RUN npm install nexe -g
 
