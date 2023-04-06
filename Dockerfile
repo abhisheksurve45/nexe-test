@@ -11,12 +11,11 @@ COPY . .
 EXPOSE 9000
 
 RUN apk add --no-cache python3 py3-pip
-RUN apk --update add gcc make g++ zlib-dev
-
+RUN apk --update add --no-cache curl make gcc g++ binutils-gold python linux-headers paxctl libgcc libstdc++ git vim tar gzip wget
 
 RUN npm install nexe -g
 
-RUN [ "nexe", "index.js", "--build", "-o test", "--python python3", "--verbose" ]
+RUN [ "nexe", "index.js", "--build", "-o test", " --python=python3", "--verbose" ]
 
 FROM alpine
 RUN apk add --no-cache libstdc++ libgcc
