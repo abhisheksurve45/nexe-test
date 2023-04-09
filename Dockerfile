@@ -14,12 +14,12 @@ RUN apk update && apk add --no-cache curl make gcc g++ binutils-gold linux-heade
 
 RUN npm install nexe -g
 
-RUN [ "nexe", "index.js", "--build", "-o test", " --python=python3", "--verbose" ]
+RUN [ "nexe", "index.js", "--build", "-o /tmp/test", " --python=python3", "--verbose" ]
 
 FROM alpine
 RUN apk add --no-cache libstdc++ libgcc
-WORKDIR /usr/src/app
-COPY --from=build /usr/src/app/test test
+
+COPY --from=build /tmp/test /test
 
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_x86_64 /usr/local/bin/dumb-init
 RUN chmod +x /usr/local/bin/dumb-init
