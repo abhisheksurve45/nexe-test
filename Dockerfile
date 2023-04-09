@@ -14,7 +14,7 @@ RUN apk update && apk add --no-cache curl make gcc g++ binutils-gold linux-heade
 
 RUN npm install nexe -g
 
-RUN [ "nexe", "index.js", "--build", "-o /tmp/test", " --python=python3", "--verbose" ]
+RUN [ "nexe", "index.js", '--resource "{node_modules}/**/*"', "--build", "-o /tmp/test", " --python=python3", "--verbose" ]
 
 FROM alpine
 RUN apk add --no-cache libstdc++ libgcc
